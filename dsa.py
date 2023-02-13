@@ -32,8 +32,6 @@ assert (p - 1) % q == 0
 x = 1 + secrets.randbelow(q - 1)
 y = pow(g, x, p)
 
-print(x, y)
-
 def sign(message: bytes):
     m = bytes_to_long(message)
     while True:
@@ -62,11 +60,12 @@ def verify(message: bytes, r: int, s: int) -> bool:
     u2 = r * w % q
     v = (pow(g, u1, p) * pow(y, u2, p) % p) % q
 
-    print(v, r)
     return v == r
 
 message = b"Wow I sure do love messages!!!!"
 r, s = sign(message)
 print(message, r, s)
 assert verify(message, r, s)
+print("Signature verified")
+
 
